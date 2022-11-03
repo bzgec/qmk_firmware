@@ -426,11 +426,11 @@ static inline bool handle_keycode_6(keyrecord_t *record) {
     } else {
         // Key released
         if(pressedWithShift == true) {
-            unregister_code(SI_V);
+            unregister_code(SI_3);
             // Unregister Right Alt back to default state
             unregister_code(KC_RALT);
         } else {
-            unregister_code(SI_3);
+            unregister_code(SI_6);
         }
     }
 
@@ -672,8 +672,8 @@ static inline bool handle_keycode_grv(keyrecord_t *record) {
             // Pressed without shift: '`'
             pressedWithShift = false;
             // Register Right Alt ('`' on slovenian keyboard is with Right Alt (Alt Gr) and Shift)
-            register_code(KC_RALT);
             register_code(KC_LSFT);
+            register_code(KC_RALT);
             register_code(SI_7);
         }
     } else {
