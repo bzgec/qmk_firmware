@@ -3,43 +3,95 @@
  ***************************************************************************************************
  *
  ***************************************************************************************************
- *  Layer 0:
+ * Base layer:
  ***************************************************************************************************
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  |  TAB   |  q  Q  |  w  W  |  f  F  |  p  P  |  b  B  |             |  j  J  |  l  L  |  u  U  |  y  Y  |  ;  :  |  =  +  |
+ *  | TAB    |  q  Q  |  w  W  |  f  F  |  p  P  |  b  B  |             |  j  J  |  l  L  |  u  U  |  y  Y  |  ;  :  |  =  +  |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  |  MO(2) |  a  A  |  r  R  |  s  S  |  t  T  |  g  G  |             |  m  M  |  n  N  |  e  E  |  i  I  |  o  O  |  '  "  |
+ *  | EXT1   |  a  A  |  r  R  |  s  S  |  t  T  |  g  G  |             |  m  M  |  n  N  |  e  E  |  i  I  |  o  O  |  '  "  |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | Shift  |  z  Z  |  x  X  |  c  C  |  d  D  |  v  V  |             |  k  K  |  h  H  |  ,  <  |  .  >  |  /  ?  | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
- *                                  |  Win   |  Ctrl  | Space  |   | Enter  | MO(1)  | L Alt  |
+ *                                  | Win    | Ctrl   | Space  |   | Enter  | SYM    | L Alt  |
  *                                  +--------+--------+--------+   +--------+--------+--------+
  *
  ***************************************************************************************************
- *  Layer 1:
+ * Symbols layer:
  ***************************************************************************************************
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  |  TAB   |  1  !  |  2  @  |  3  #  |  4  $  |  5  %  |             |  6  ^  |  7  &  |  8  *  |  9  (  |  0  )  |  -  _  |
+ *  | TAB    |  1  !  |  2  @  |  3  #  |  4  $  |  5  %  |             |  6  ^  |  7  &  |  8  *  |  9  (  |  0  )  |  -  _  |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  |  MO(2) |        |        |  š  Š  |        |        |             |        |        |  €  °  |  [  {  |  ]  }  |  `  ~  |
+ *  | EXT2   |        |        |  š  Š  |        |        |             |        |        |  €  °  |  [  {  |  ]  }  |  `  ~  |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | Shift  |  ž  Ž  |        |  č  Č  |        |        |             |        |        |        |        |  \  |  | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
- *                                  |  Win   |  Ctrl  | Space  |   | Enter  | MO(1)  | L Alt  |
+ *                                  | Win    | Ctrl   | Space  |   | Enter  | XXX    | L Alt  |
  *                                  +--------+--------+--------+   +--------+--------+--------+
  *
  ***************************************************************************************************
- *  Layer 2:
+ * Extend layer 1:
  ***************************************************************************************************
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  |  TAB   |  ESC   |  WhUp  | GoBack |  GoFwd |        |             |  Home  |  PgDn  |  PgUp  |  End   |  Del   | Print  |
+ *  | TAB    | ESC    | WhUp   | GoBack | GoFwd  |        |             | Home   | PgDn   | PgUp   | End    | Del    | Print  |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  |  MO(2) |  Back  | WhDown | Shift  |  Ctrl  |  Alt   |             |  Left  |  Down  |  Up    | Right  |  Back  |  ESC   |
+ *  | XXX    | Back   | WhDown |        |        |        |             | Left   | Down   | Up     | Right  | Back   | ESC    |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  |  Shift |        |  Cut   |  Copy  |        | Paste  |             |  Undo  |  Redo  |        |        |        |  Shift |
+ *  | Shift  |        |        |        |        |        |             | Undo   | Redo   |        |        |        | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
- *                                  |  Win   |  Ctrl  |  Space |   | Enter  | MO(1)  | L Alt  |
+ *                                  | Win    | Ctrl   | Enter  |   | Enter  | EXT2   | L Alt  |
  *                                  +--------+--------+--------+   +--------+--------+--------+
+ *
+ ***************************************************************************************************
+ * Extend layer 2:
+ ***************************************************************************************************
+ *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
+ *  | TAB    | F1     | F2     | F3     | F4     | F5     |             | F6     | F7     | F8     | F9     | F10    |        |
+ *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
+ *  | XXX    |        |        |        |        |        |             |        |        |        | F11    | F12    |        |
+ *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
+ *  | Shift  |        |        |        |        |        |             |        |        |        |        |        | Shift  |
+ *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
+ *                                  | Win    | Ctrl   | Enter  |   | Enter  | XXX    | L Alt  |
+ *                                  +--------+--------+--------+   +--------+--------+--------+
+ *
+ ***************************************************************************************************
+ * QMK layer:
+ ***************************************************************************************************
+ *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
+ *  | XXX    |        |        |        |        |        |             |        |        |        |        |        |        |
+ *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
+ *  |        |        |        |        |        | Reset  |             |        | To SI  | To SI  |        |        |        |
+ *  |        |        |        |        |        |        |             |        | Linux  | Win    |        |        |        |
+ *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
+ *  |        |        |        |        |        | Bootl  |             |        |        |        |        |        |        |
+ *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
+ *                                  |        |        |        |   |        |        |        |
+ *                                  +--------+--------+--------+   +--------+--------+--------+
+ *
+ * - `To US`: Switch keyboard layout to match US host layout
+ * - `To SI Linux`: Switch keyboard layout to match SI host layout, Linux host
+ * - `To SI Win`: Switch keyboard layout to match SI host layout, Windows host
+ *
+ ***************************************************************************************************
+ * Notes:
+ ***************************************************************************************************
+ * - EXT2 layer is accessible when pressing: 'EXT' + 'SYM'
+ * - QMK layer is accessible when holding TAB key
+ * - Difference between "SI Linux" and "SI Windows" is in how a few special characters
+ *   are implemented but for the end use there should be no difference
+ *
+ *   - `^`
+ *   - `\``
+ *   - `~`
+ *
+ * - Default host layout is Linux
+ *
+ ***************************************************************************************************
+ * TODO:
+ ***************************************************************************************************
+ * - Double tab on SHIFT key toggles CAPS_LOCK
+ * - `Reset`: Reset this side of the keyboard
+ * - `Bootl`: Reset this side of the keyboard to bootloader mode
  *
  ***************************************************************************************************
  *  Commands:
@@ -61,56 +113,91 @@
 #include QMK_KEYBOARD_H
 #include "keymap_slovenian.h"
 
+#define xxxxxxx KC_NO
+
 #define MODS_L_SHIFT_MASK  MOD_BIT(KC_LSHIFT)
 #define MODS_R_SHIFT_MASK  MOD_BIT(KC_RSHIFT)
-#define MODS_SHIFT_MASK  (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT))
-#define MODS_CTRL_MASK   (MOD_BIT(KC_LCTL) | MOD_BIT(KC_RCTRL))
-#define MODS_ALT_MASK    (MOD_BIT(KC_LALT) | MOD_BIT(KC_RALT))
+#define MODS_SHIFT_MASK    (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT))
+#define MODS_CTRL_MASK     (MOD_BIT(KC_LCTL) | MOD_BIT(KC_RCTRL))
+#define MODS_ALT_MASK      (MOD_BIT(KC_LALT) | MOD_BIT(KC_RALT))
+
+#define BASE   0u  // Base layer, host layout: SI, Linux host
+#define SYM    1u  // Symbols layer, host layout: SI, Linux host
+#define EXT1   2u  // Extend layer 1
+#define EXT2   3u  // Extend layer 2
+#define L_QMK  4u  // QMK layer
+
+// Go to QMK layer when holding TAB key
+// On tab: TAB
+// On hold: L_QMK (QMK layer)
+#define TAB_L_QMK  LT(L_QMK, KC_TAB)
+
+typedef enum KEYMAP_hostOs_ENUM {
+    KEYMAP_hostOs_LIN = 0u,
+    KEYMAP_hostOs_WIN = 1u,
+} KEYMAP_hostOs_E;
 
 typedef enum SI_COLEMAK_keycodes_ENUM {
-  _COMM = SAFE_RANGE,  // ','  '<'
-  _DOT,                // '.'  '>'
-  _SCLN,               // ';'  ':'
-  _EQL,                // '='  '+'
-  _QUOT,               // '''  '"'
-  _SLSH,               // '/'  '?'
-  _2,                  // '2'  '@'
-  _6,                  // '6'  '^'
-  _7,                  // '7'  '&'
-  _8,                  // '8'  '*'
-  _9,                  // '9'  '('
-  _0,                  // '0'  ')'
-  _EURO,               // '€'  '°'
-  _LBRC,               // '['  '{'
-  _RBRC,               // ']'  '}'
-  _GRV,                // '`'  '~'
-  _BSLS,               // '\'  '|'
+  _TO_LIN = SAFE_RANGE,
+  _TO_WIN,
+  _COMM,  // ','  '<'
+  _DOT,   // '.'  '>'
+  _SCLN,  // ';'  ':'
+  _EQL,   // '='  '+'
+  _QUOT,  // '''  '"'
+  _SLSH,  // '/'  '?'
+  _2,     // '2'  '@'
+  _6,     // '6'  '^'
+  _7,     // '7'  '&'
+  _8,     // '8'  '*'
+  _9,     // '9'  '('
+  _0,     // '0'  ')'
+  _EURO,  // '€'  '°'
+  _LBRC,  // '['  '{'
+  _RBRC,  // ']'  '}'
+  _GRV,   // '`'  '~'
+  _BSLS,  // '\'  '|'
 } SI_COLEMAK_keycodes_E;
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format off
-    [0] = LAYOUT_split_3x6_3(
-        KC_TAB,   SI_Q,     SI_W,     SI_F,     SI_P,     SI_B,          SI_J,     SI_L,     SI_U,     SI_Y,     _SCLN,    _EQL,
-        MO(2),    SI_A,     SI_R,     SI_S,     SI_T,     SI_G,          SI_M,     SI_N,     SI_E,     SI_I,     SI_O,     _QUOT,
-        KC_LSFT,  SI_Z,     SI_X,     SI_C,     SI_D,     SI_V,          SI_K,     SI_H,     _COMM,    _DOT,     _SLSH,    KC_RSFT,
-                                      KC_LWIN,  KC_LCTL,  KC_SPC,        KC_ENT,   MO(1),    KC_LALT
+    [BASE] = LAYOUT_split_3x6_3(
+        TAB_L_QMK, SI_Q,     SI_W,     SI_F,     SI_P,     SI_B,          SI_J,    SI_L,     SI_U,    SI_Y,  _SCLN,  _EQL,
+        MO(EXT1),  SI_A,     SI_R,     SI_S,     SI_T,     SI_G,          SI_M,    SI_N,     SI_E,    SI_I,  SI_O,   _QUOT,
+        KC_LSFT,   SI_Z,     SI_X,     SI_C,     SI_D,     SI_V,          SI_K,    SI_H,     _COMM,   _DOT,  _SLSH,  KC_RSFT,
+                                       KC_LWIN,  KC_LCTL,  KC_SPC,        KC_ENT,  MO(SYM),  KC_LALT
     ),
-    [1] = LAYOUT_split_3x6_3(
+    [SYM] = LAYOUT_split_3x6_3(
         _______,  SI_1,     _2,       SI_3,     SI_4,     SI_5,          _6,       _7,       _8,       _9,       _0,       SI_MINS,
-        _______,  KC_NO,    KC_NO,    SI_SCAR,  KC_NO,    KC_NO,         KC_NO,    KC_NO,    _EURO,    _LBRC,    _RBRC,    _GRV,
-        _______,  SI_ZCAR,  KC_NO,    SI_CCAR,  KC_NO,    KC_NO,         KC_NO,    KC_NO,    KC_NO,    KC_NO,    _BSLS,    _______,
-                                      _______,  _______,  _______,       _______,  _______,  _______
+        MO(EXT2), xxxxxxx,  xxxxxxx,  SI_SCAR,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  _EURO,    _LBRC,    _RBRC,    _GRV,
+        _______,  SI_ZCAR,  xxxxxxx,  SI_CCAR,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  _BSLS,    _______,
+                                      _______,  _______,  _______,       _______,  xxxxxxx,  _______
     ),
-    [2] = LAYOUT_split_3x6_3(
-        _______,  KC_ESC,   KC_WH_U,  KC_WBAK,  KC_WFWD,  KC_NO,         KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   KC_DEL,   KC_PSCR,
-        _______,  KC_BSPC,  KC_WH_D,  KC_LSFT,  KC_LCTL,  KC_LALT,       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_BSPC,  KC_ESC,
-        _______,  KC_NO,    KC_CUT,   KC_COPY,  KC_NO,    KC_PSTE,       KC_UNDO,  KC_AGIN,  KC_NO,    KC_NO,    KC_NO,    _______,
-                                      _______,  _______,  KC_ENT,        KC_ENT,   _______,  _______
+    [EXT1] = LAYOUT_split_3x6_3(
+        _______,  KC_ESC,   KC_WH_U,  KC_WBAK,  KC_WFWD,  xxxxxxx,       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   KC_DEL,   KC_PSCR,
+        xxxxxxx,  KC_BSPC,  KC_WH_D,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_BSPC,  KC_ESC,
+        _______,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_UNDO,  KC_AGIN,  xxxxxxx,  xxxxxxx,  KC_DEL,   _______,
+                                      _______,  _______,  KC_ENT,        _______,  MO(EXT2), _______
+    ),
+    [EXT2] = LAYOUT_split_3x6_3(
+        _______,  KC_F1,   KC_F2,    KC_F3,    KC_F4,    KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   xxxxxxx,
+        xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  KC_F11,   KC_F12,   xxxxxxx,
+        _______,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  _______,
+                                     _______,  _______,  _______,       _______,  xxxxxxx,  _______
+    ),
+    [L_QMK] = LAYOUT_split_3x6_3(
+        xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,
+        xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  _TO_LIN,  _TO_WIN,  xxxxxxx,  xxxxxxx,  xxxxxxx,
+        xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,
+                                     xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx
     ),
     // clang-format on
 };
 
+static volatile KEYMAP_hostOs_E fs_hostOs = KEYMAP_hostOs_LIN;
+
+static inline bool handle_keycode_changeHostOs(keyrecord_t *record, KEYMAP_hostOs_E inHostOs);
 static inline bool handle_keycode_comm(keyrecord_t *record);
 static inline bool handle_keycode_dot(keyrecord_t *record);
 static inline bool handle_keycode_scln(keyrecord_t *record);
@@ -134,6 +221,12 @@ static void unreg_alt_reg_shift(bool *inPressedWithShift_L, bool *inPressedWithS
 // https://github.com/qmk/qmk_firmware/blob/master/docs/custom_quantum_functions.md#programming-the-behavior-of-any-keycode-idprogramming-the-behavior-of-any-keycode
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
+        case _TO_LIN:
+            return handle_keycode_changeHostOs(record, KEYMAP_hostOs_LIN);
+
+        case _TO_WIN:
+            return handle_keycode_changeHostOs(record, KEYMAP_hostOs_WIN);
+
         case _COMM:
             return handle_keycode_comm(record);
 
@@ -188,6 +281,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default:
             return true; // Process all other keycodes normally
     }
+}
+
+static inline bool handle_keycode_changeHostOs(keyrecord_t *record, KEYMAP_hostOs_E inHostOs) {
+    if(record->event.pressed) {
+        fs_hostOs = inHostOs;
+    } else {
+        // Key released
+    }
+
+    return false; // Skip all further processing of this key
 }
 
 // ','  '<'
@@ -408,27 +511,47 @@ static inline bool handle_keycode_2(keyrecord_t *record) {
 
 // '6'  '^'
 static inline bool handle_keycode_6(keyrecord_t *record) {
-    static bool pressedWithShift = false;
+    static bool pressedWithShift_L = false;
+    static bool pressedWithShift_R = false;
 
     if(record->event.pressed) {
         // Key pressed
         if(get_mods() & MODS_SHIFT_MASK ) {
             // Pressed with shift: '^'
-            pressedWithShift = true;
-            // Register Right Alt ('^' on slovenian keyboard is with Right Alt (Alt Gr) and Shift)
-            register_code(KC_RALT);
+
+            // Host dependent
+            if(fs_hostOs == KEYMAP_hostOs_WIN) {
+                // Register Right Alt and unregister Shift
+                // ('^' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift)
+                reg_alt_unreg_shift(&pressedWithShift_L, &pressedWithShift_R);
+            } else {
+                pressedWithShift_L = true;
+                pressedWithShift_R = true;
+                // Register Right Alt
+                // ('^' on slovenian keyboard is with Right Alt (Alt Gr) and Shift)
+                register_code(KC_RALT);
+            }
+
             register_code(SI_3);
         } else {
             // Pressed without shift: '6'
-            pressedWithShift = false;
+            pressedWithShift_L = false;
+            pressedWithShift_R = false;
             register_code(SI_6);
         }
     } else {
         // Key released
-        if(pressedWithShift == true) {
+        if((pressedWithShift_L == true) || (pressedWithShift_R == true)) {
             unregister_code(SI_3);
-            // Unregister Right Alt back to default state
-            unregister_code(KC_RALT);
+
+            // Host dependent
+            if(fs_hostOs == KEYMAP_hostOs_WIN) {
+                // Unregister Right Alt back to default state and register pressed Shift
+                unreg_alt_reg_shift(&pressedWithShift_L, &pressedWithShift_R);
+            } else {
+                // Unregister Right Alt back to default state
+                unregister_code(KC_RALT);
+            }
         } else {
             unregister_code(SI_6);
         }
@@ -658,35 +781,67 @@ static inline bool handle_keycode_rbrc(keyrecord_t *record) {
 
 // '`'  '~'
 static inline bool handle_keycode_grv(keyrecord_t *record) {
-    static bool pressedWithShift = false;
+    static bool pressedWithShift_L = false;
+    static bool pressedWithShift_R = false;
 
     if(record->event.pressed) {
         // Key pressed
         if(get_mods() & MODS_SHIFT_MASK ) {
             // Pressed with shift: '~'
-            pressedWithShift = true;
-            // Register Right Alt ('~' on slovenian keyboard is with Right Alt (Alt Gr) and Shift)
-            register_code(KC_RALT);
+
+            // Host dependent
+            if(fs_hostOs == KEYMAP_hostOs_WIN) {
+                // Register Right Alt
+                // ('~' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift)
+                reg_alt_unreg_shift(&pressedWithShift_L, &pressedWithShift_R);
+            } else {
+                pressedWithShift_L = true;
+                pressedWithShift_R = true;
+
+                // Register Right Alt ('~' on slovenian keyboard is with Right Alt (Alt Gr) and Shift)
+                register_code(KC_RALT);
+            }
+
             register_code(SI_1);
         } else {
             // Pressed without shift: '`'
-            pressedWithShift = false;
-            // Register Right Alt ('`' on slovenian keyboard is with Right Alt (Alt Gr) and Shift)
-            register_code(KC_LSFT);
+            pressedWithShift_L = false;
+            pressedWithShift_R = false;
+            if(fs_hostOs == KEYMAP_hostOs_WIN) {
+                // '`' on slovenian keyboard is without Shift
+            } else {
+                // '`' on slovenian keyboard is with Shift
+                register_code(KC_LSFT);
+            }
+            // Register Right Alt
+            // ('`' on slovenian keyboard is with Right Alt (Alt Gr) and with/without Shift)
             register_code(KC_RALT);
             register_code(SI_7);
         }
     } else {
         // Key released
-        if(pressedWithShift == true) {
+        if((pressedWithShift_L == true) || (pressedWithShift_R == true)) {
             unregister_code(SI_1);
-            // Unregister Right Alt back to default state
-            unregister_code(KC_RALT);
+
+            // Host dependent
+            if(fs_hostOs == KEYMAP_hostOs_WIN) {
+                // Unregister Right Alt back to default state and register pressed Shift
+                unreg_alt_reg_shift(&pressedWithShift_L, &pressedWithShift_R);
+            } else {
+                // Unregister Right Alt back to default state
+                unregister_code(KC_RALT);
+            }
         } else {
             unregister_code(SI_7);
             // Unregister Right Alt and Shift back to default state
             unregister_code(KC_RALT);
-            unregister_code(KC_LSFT);
+            if(fs_hostOs == KEYMAP_hostOs_WIN) {
+                // '`' on slovenian keyboard is without Shift
+            } else {
+                // '`' on slovenian keyboard is with Shift
+                register_code(KC_LSFT);
+                unregister_code(KC_LSFT);
+            }
         }
     }
 
