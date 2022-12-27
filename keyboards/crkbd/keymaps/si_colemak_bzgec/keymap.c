@@ -36,7 +36,7 @@
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | XXX    | Back   | WhDown |        |        |        |             | Left   | Down   | Up     | Right  | Back   | ESC    |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  | Shift  |        |        |        |        |        |             | Undo   | Redo   |        |        |        | Shift  |
+ *  | Shift  |        |        |        |        |        |             | Undo   | Redo   |        |        | Del    | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
  *                                  | Win    | Ctrl   | Enter  |   | Enter  | EXT2   | L Alt  |
  *                                  +--------+--------+--------+   +--------+--------+--------+
@@ -47,9 +47,9 @@
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | TAB    | F1     | F2     | F3     | F4     | F5     |             | F6     | F7     | F8     | F9     | F10    |        |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  | XXX    |        |        |        |        |        |             |        |        |        | F11    | F12    |        |
+ *  | XXX    |        |        |        |        |        |             | Vol Mu | Vol Dn | Vol Up | F11    | F12    |        |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  | Shift  |        |        |        |        |        |             |        |        |        |        |        | Shift  |
+ *  | Shift  |        |        |        |        |        |             |        | Bri Dn | Bri Up |        |        | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
  *                                  | Win    | Ctrl   | Enter  |   | Enter  | XXX    | L Alt  |
  *                                  +--------+--------+--------+   +--------+--------+--------+
@@ -182,8 +182,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [EXT2] = LAYOUT_split_3x6_3(
         _______,  KC_F1,   KC_F2,    KC_F3,    KC_F4,    KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   xxxxxxx,
-        xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  KC_F11,   KC_F12,   xxxxxxx,
-        _______,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  _______,
+        xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_F11,   KC_F12,   xxxxxxx,
+        _______,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  KC_BRID,  KC_BRIU,  xxxxxxx,  xxxxxxx,  _______,
                                      _______,  _______,  _______,       _______,  xxxxxxx,  _______
     ),
     [L_QMK] = LAYOUT_split_3x6_3(
