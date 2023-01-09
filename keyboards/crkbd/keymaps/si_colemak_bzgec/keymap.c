@@ -49,7 +49,7 @@
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | XXX    |        |        |        |        |        |             | Vol Mu | Vol Dn | Vol Up | F11    | F12    |        |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  | Shift  |        |        |        |        |        |             |        | Bri Dn | Bri Up |        |        | Shift  |
+ *  | Shift  |        |        |        |        |        |             | Mic Mu | Bri Dn | Bri Up |        |        | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
  *                                  | Win    | Ctrl   | Enter  |   | Enter  | XXX    | L Alt  |
  *                                  +--------+--------+--------+   +--------+--------+--------+
@@ -83,6 +83,7 @@
  *   - `^`
  *   - `\``
  *   - `~`
+ *   - microphone mute (F20 -> Win+Shift+A)
  *
  * - Default host layout is Linux
  *
@@ -157,6 +158,7 @@ typedef enum SI_COLEMAK_keycodes_ENUM {
   _RBRC,  // ']'  '}'
   _GRV,   // '`'  '~'
   _BSLS,  // '\'  '|'
+  _MICMUTE,  // Microphone mute (different on Linux and Windows)
 } SI_COLEMAK_keycodes_E;
 
 
@@ -183,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [EXT2] = LAYOUT_split_3x6_3(
         _______,  KC_F1,   KC_F2,    KC_F3,    KC_F4,    KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   xxxxxxx,
         xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_F11,   KC_F12,   xxxxxxx,
-        _______,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  KC_BRID,  KC_BRIU,  xxxxxxx,  xxxxxxx,  _______,
+        _______,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       _MICMUTE, KC_BRID,  KC_BRIU,  xxxxxxx,  xxxxxxx,  _______,
                                      _______,  _______,  _______,       _______,  xxxxxxx,  _______
     ),
     [L_QMK] = LAYOUT_split_3x6_3(
@@ -215,6 +217,7 @@ static inline bool handle_keycode_lbrc(keyrecord_t *record);
 static inline bool handle_keycode_rbrc(keyrecord_t *record);
 static inline bool handle_keycode_grv(keyrecord_t *record);
 static inline bool handle_keycode_bsls(keyrecord_t *record);
+static inline bool handle_keycode_micmute(keyrecord_t *record);
 static void reg_alt_unreg_shift(bool *inPressedWithShift_L, bool *inPressedWithShift_R);
 static void unreg_alt_reg_shift(bool *inPressedWithShift_L, bool *inPressedWithShift_R);
 
@@ -277,6 +280,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case _BSLS:
             return handle_keycode_bsls(record);
+
+        case _MICMUTE:
+            return handle_keycode_micmute(record);
 
         default:
             return true; // Process all other keycodes normally
@@ -881,6 +887,35 @@ static inline bool handle_keycode_bsls(keyrecord_t *record) {
             // Unregister Right Alt back to default state
             unregister_code(KC_RALT);
 
+        }
+    }
+
+    return false; // Skip all further processing of this key
+}
+
+// Linux: KC_F20 should work as XF86AudioMicMute on most linux distributions - https://github.com/qmk/qmk_firmware/issues/17749#issuecomment-1192446662
+// Windows: Win+Shift+A as this is default shortcut for Video Conference Mute (VCM) in PowerToys
+//          (this means you need to install PowerToys and enable VCM)
+static inline bool handle_keycode_micmute(keyrecord_t *record) {
+    // TODO: probably need to check if WIN and SHIFT keys are pressed (same as `handle_keycode_bsls()` for example)
+
+    if(record->event.pressed) {
+        // Key pressed
+        if(fs_hostOs == KEYMAP_hostOs_WIN) {
+            register_code(KC_LWIN);
+            register_code(KC_LSFT);
+            register_code(SI_A);
+        } else {
+            register_code(KC_F20);
+        }
+    } else {
+        // Key released
+        if(fs_hostOs == KEYMAP_hostOs_WIN) {
+            unregister_code(KC_LWIN);
+            unregister_code(KC_LSFT);
+            unregister_code(SI_A);
+        } else {
+            unregister_code(KC_F20);
         }
     }
 
