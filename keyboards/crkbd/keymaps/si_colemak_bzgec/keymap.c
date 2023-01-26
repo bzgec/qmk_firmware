@@ -34,7 +34,7 @@
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | TAB    | ESC    | WhUp   | GoBack | GoFwd  |        |             | Home   | PgDn   | PgUp   | End    | Del    | Print  |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  | XXX    | Back   | WhDown |        |        |        |             | Left   | Down   | Up     | Right  | Back   | ESC    |
+ *  | XXX    | Back   | WhDown | L desk | R desk |        |             | Left   | Down   | Up     | Right  | Back   | ESC    |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | Shift  |        |        |        |        |        |             | Undo   | Redo   |        |        | Del    | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
@@ -159,6 +159,8 @@ typedef enum SI_COLEMAK_keycodes_ENUM {
   _GRV,   // '`'  '~'
   _BSLS,  // '\'  '|'
   _MICMUTE,  // Microphone mute (different on Linux and Windows)
+  _TOLDSK,  // Move to left desktop on Windows
+  _TORDSK,  // Move to right desktop on Windows
 } SI_COLEMAK_keycodes_E;
 
 
@@ -178,7 +180,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [EXT1] = LAYOUT_split_3x6_3(
         _______,  KC_ESC,   KC_WH_U,  KC_WBAK,  KC_WFWD,  xxxxxxx,       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   KC_DEL,   KC_PSCR,
-        xxxxxxx,  KC_BSPC,  KC_WH_D,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_BSPC,  KC_ESC,
+        xxxxxxx,  KC_BSPC,  KC_WH_D,  _TOLDSK,  _TORDSK,  xxxxxxx,       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_BSPC,  KC_ESC,
         _______,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_UNDO,  KC_AGIN,  xxxxxxx,  xxxxxxx,  KC_DEL,   _______,
                                       _______,  _______,  KC_ENT,        _______,  MO(EXT2), _______
     ),
@@ -218,6 +220,8 @@ static inline bool handle_keycode_rbrc(keyrecord_t *record);
 static inline bool handle_keycode_grv(keyrecord_t *record);
 static inline bool handle_keycode_bsls(keyrecord_t *record);
 static inline bool handle_keycode_micmute(keyrecord_t *record);
+static inline bool handle_keycode_mv_to_left_desktop(keyrecord_t *record);
+static inline bool handle_keycode_mv_to_right_desktop(keyrecord_t *record);
 static void reg_alt_unreg_shift(bool *inPressedWithShift_L, bool *inPressedWithShift_R);
 static void unreg_alt_reg_shift(bool *inPressedWithShift_L, bool *inPressedWithShift_R);
 
@@ -283,6 +287,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case _MICMUTE:
             return handle_keycode_micmute(record);
+
+        case _TOLDSK:
+            return handle_keycode_mv_to_left_desktop(record);
+
+        case _TORDSK:
+            return handle_keycode_mv_to_right_desktop(record);
 
         default:
             return true; // Process all other keycodes normally
@@ -916,6 +926,64 @@ static inline bool handle_keycode_micmute(keyrecord_t *record) {
             unregister_code(SI_A);
         } else {
             unregister_code(KC_F20);
+        }
+    }
+
+    return false; // Skip all further processing of this key
+}
+
+// Move to LEFT Windows desktop
+static inline bool handle_keycode_mv_to_left_desktop(keyrecord_t *record) {
+    // TODO: probably need to check if WIN and CTRL keys are pressed (same as `handle_keycode_bsls()` for example)
+
+    if(record->event.pressed) {
+        // Key pressed
+        if(fs_hostOs == KEYMAP_hostOs_WIN) {
+            register_code(KC_LWIN);
+            register_code(KC_LCTL);
+            //register_code(KC_RCTL);
+            register_code(KC_LEFT);
+        } else {
+            // Do nothing on linux
+        }
+    } else {
+        // Key released
+        if(fs_hostOs == KEYMAP_hostOs_WIN) {
+            unregister_code(KC_LWIN);
+            unregister_code(KC_LCTL);
+            //unregister_code(KC_RCTL);
+            unregister_code(KC_LEFT);
+        } else {
+            // Do nothing on linux
+        }
+    }
+
+    return false; // Skip all further processing of this key
+}
+
+// Move to RIGHT Windows desktop
+static inline bool handle_keycode_mv_to_right_desktop(keyrecord_t *record) {
+    // TODO: probably need to check if WIN and CTRL keys are pressed (same as `handle_keycode_bsls()` for example)
+
+    if(record->event.pressed) {
+        // Key pressed
+        if(fs_hostOs == KEYMAP_hostOs_WIN) {
+            register_code(KC_LWIN);
+            register_code(KC_LCTL);
+            //register_code(KC_RCTL);
+            register_code(KC_RGHT);
+        } else {
+            // Do nothing on linux
+        }
+    } else {
+        // Key released
+        if(fs_hostOs == KEYMAP_hostOs_WIN) {
+            unregister_code(KC_LWIN);
+            unregister_code(KC_LCTL);
+            //unregister_code(KC_RCTL);
+            unregister_code(KC_RGHT);
+        } else {
+            // Do nothing on linux
         }
     }
 
