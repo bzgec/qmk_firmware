@@ -97,6 +97,7 @@
  ***************************************************************************************************
  *  Commands:
  ***************************************************************************************************
+ * Move to `qmk_firmware` folder
  * `qmk compile -kb crkbd -km si_colemak_bzgec`
  * `qmk flash -kb crkbd -km si_colemak_bzgec`
  *
@@ -490,6 +491,7 @@ static inline bool handle_keycode_slsh(keyrecord_t *record) {
 }
 
 // '2'  '@'
+// Problem when shift is released before the key (2)
 static inline bool handle_keycode_2(keyrecord_t *record) {
     static bool pressedWithShift = false;
 
