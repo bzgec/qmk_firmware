@@ -491,8 +491,8 @@ static inline bool handle_keycode_slsh(keyrecord_t *record) {
 }
 
 // '2'  '@'
-// Problem when shift is released before the key (2)
 static inline bool handle_keycode_2(keyrecord_t *record) {
+    // Problem with this option: when holding '@' it doesn't repeat
     static bool pressedWithShift = false;
 
     if(record->event.pressed) {
@@ -501,9 +501,11 @@ static inline bool handle_keycode_2(keyrecord_t *record) {
             // Pressed with shift: '@'
             // Register Right Alt and unregister Shift
             // ('@' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift)
-            reg_alt_unreg_shift();
             pressedWithShift = true;
+            reg_alt_unreg_shift();
             register_code(SI_V);
+            unregister_code(SI_V);
+            unreg_alt_reg_shift();
         } else {
             // Pressed without shift: '2'
             pressedWithShift = false;
@@ -511,17 +513,43 @@ static inline bool handle_keycode_2(keyrecord_t *record) {
         }
     } else {
         // Key released
-        if(pressedWithShift == true) {
-            unregister_code(SI_V);
-
-            // Unregister Right Alt back to default state and register pressed Shift
-            unreg_alt_reg_shift();
-        } else {
+        if(pressedWithShift == false) {
             unregister_code(SI_2);
         }
     }
 
     return false; // Skip all further processing of this key
+
+    // Problem with this option: when shift is released before the key (2), shift is stuck until pressed again
+    /* static bool pressedWithShift = false; */
+
+    /* if(record->event.pressed) { */
+    /*     // Key pressed */
+    /*     if(get_mods() & MODS_SHIFT_MASK) { */
+    /*         // Pressed with shift: '@' */
+    /*         // Register Right Alt and unregister Shift */
+    /*         // ('@' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift) */
+    /*         reg_alt_unreg_shift(); */
+    /*         pressedWithShift = true; */
+    /*         register_code(SI_V); */
+    /*     } else { */
+    /*         // Pressed without shift: '2' */
+    /*         pressedWithShift = false; */
+    /*         register_code(SI_2); */
+    /*     } */
+    /* } else { */
+    /*     // Key released */
+    /*     if(pressedWithShift == true) { */
+    /*         unregister_code(SI_V); */
+
+    /*         // Unregister Right Alt back to default state and register pressed Shift */
+    /*         unreg_alt_reg_shift(); */
+    /*     } else { */
+    /*         unregister_code(SI_2); */
+    /*     } */
+    /* } */
+
+    /* return false; // Skip all further processing of this key */
 }
 
 // '6'  '^'
