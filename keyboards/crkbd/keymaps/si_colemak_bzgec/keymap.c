@@ -199,6 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 static volatile KEYMAP_hostOs_E fs_hostOs = KEYMAP_hostOs_LIN;
+static volatile bool fs_shiftPress = false;
 
 static inline bool handle_keycode_changeHostOs(keyrecord_t *record, KEYMAP_hostOs_E inHostOs);
 static inline bool handle_keycode_comm(keyrecord_t *record);
@@ -227,6 +228,10 @@ static void unreg_alt_reg_shift(void);
 // https://github.com/qmk/qmk_firmware/blob/master/docs/custom_quantum_functions.md#programming-the-behavior-of-any-keycode-idprogramming-the-behavior-of-any-keycode
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
+        case KC_LSFT:
+            fs_shiftPress = record->event.pressed;
+            return true;
+
         case _TO_LIN:
             return handle_keycode_changeHostOs(record, KEYMAP_hostOs_LIN);
 
@@ -492,20 +497,17 @@ static inline bool handle_keycode_slsh(keyrecord_t *record) {
 
 // '2'  '@'
 static inline bool handle_keycode_2(keyrecord_t *record) {
-    // Problem with this option: when holding '@' it doesn't repeat
     static bool pressedWithShift = false;
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '@'
             // Register Right Alt and unregister Shift
             // ('@' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift)
-            pressedWithShift = true;
             reg_alt_unreg_shift();
+            pressedWithShift = true;
             register_code(SI_V);
-            unregister_code(SI_V);
-            unreg_alt_reg_shift();
         } else {
             // Pressed without shift: '2'
             pressedWithShift = false;
@@ -513,14 +515,53 @@ static inline bool handle_keycode_2(keyrecord_t *record) {
         }
     } else {
         // Key released
-        if(pressedWithShift == false) {
+        if(pressedWithShift == true) {
+            unregister_code(SI_V);
+
+            // Unregister Right Alt back to default state and enable shift
+            // (if it was not released before the key (2) was released)
+            unregister_code(KC_RALT);
+            if(fs_shiftPress == true) {
+                // Shift key still pressed -> register it back
+                register_code(KC_LSFT);
+            }
+        } else {
             unregister_code(SI_2);
         }
     }
 
     return false; // Skip all further processing of this key
 
-    // Problem with this option: when shift is released before the key (2), shift is stuck until pressed again
+    /* // Problem with this option: when holding '@' it doesn't repeat */
+    /* // and on one Ubuntu laptop in terminal '@' was rarely registered (mostly 'v' or 'V') */
+    /* static bool pressedWithShift = false; */
+
+    /* if(record->event.pressed) { */
+    /*     // Key pressed */
+    /*     if(get_mods() & MODS_SHIFT_MASK) { */
+    /*         // Pressed with shift: '@' */
+    /*         // Register Right Alt and unregister Shift */
+    /*         // ('@' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift) */
+    /*         pressedWithShift = true; */
+    /*         reg_alt_unreg_shift(); */
+    /*         register_code(SI_V); */
+    /*         unregister_code(SI_V); */
+    /*         unreg_alt_reg_shift(); */
+    /*     } else { */
+    /*         // Pressed without shift: '2' */
+    /*         pressedWithShift = false; */
+    /*         register_code(SI_2); */
+    /*     } */
+    /* } else { */
+    /*     // Key released */
+    /*     if(pressedWithShift == false) { */
+    /*         unregister_code(SI_2); */
+    /*     } */
+    /* } */
+
+    /* return false; // Skip all further processing of this key */
+
+    /* // Problem with this option: when shift is released before the key (2), shift is stuck until pressed again */
     /* static bool pressedWithShift = false; */
 
     /* if(record->event.pressed) { */
