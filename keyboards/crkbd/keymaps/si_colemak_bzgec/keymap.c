@@ -223,7 +223,7 @@ static inline bool handle_keycode_micmute(keyrecord_t *record);
 static inline bool handle_keycode_mv_to_left_desktop(keyrecord_t *record);
 static inline bool handle_keycode_mv_to_right_desktop(keyrecord_t *record);
 static void reg_alt_unreg_shift(void);
-static void unreg_alt_reg_shift(void);
+static void reg_shift_if_pressed(void);
 
 // https://github.com/qmk/qmk_firmware/blob/master/docs/custom_quantum_functions.md#programming-the-behavior-of-any-keycode-idprogramming-the-behavior-of-any-keycode
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -319,7 +319,7 @@ static inline bool handle_keycode_comm(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '<'
             pressedWithShift = true;
             // Unregister shift ('<' on slovenian keyboard is without shift)
@@ -334,8 +334,9 @@ static inline bool handle_keycode_comm(keyrecord_t *record) {
         // Key released
         if(pressedWithShift == true) {
             unregister_code(SI_LABK);
-            // Register shift back to default state
-            register_code(KC_LSFT);
+
+            // Register shift (if it was not released before the key (,) was released)
+            reg_shift_if_pressed();
         } else {
             unregister_code(SI_COMM);
         }
@@ -350,7 +351,7 @@ static inline bool handle_keycode_dot(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '>'
             pressedWithShift = true;
             register_code(SI_LABK);
@@ -377,7 +378,7 @@ static inline bool handle_keycode_scln(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: ':'
             pressedWithShift = true;
             register_code(SI_DOT);
@@ -408,7 +409,7 @@ static inline bool handle_keycode_eql(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '+'
             pressedWithShift = true;
             // Unregister shift ('+' on slovenian keyboard is without shift)
@@ -425,8 +426,9 @@ static inline bool handle_keycode_eql(keyrecord_t *record) {
         // Key released
         if(pressedWithShift == true) {
             unregister_code(SI_PLUS);
-            // Register shift back to default state
-            register_code(KC_LSFT);
+
+            // Register shift (if it was not released before the key (=) was released)
+            reg_shift_if_pressed();
         } else {
             unregister_code(SI_0);
             // Unregister shift back to default state
@@ -443,7 +445,7 @@ static inline bool handle_keycode_quot(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '"'
             pressedWithShift = true;
             register_code(SI_2);
@@ -470,7 +472,7 @@ static inline bool handle_keycode_slsh(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '?'
             pressedWithShift = true;
             register_code(SI_QUOT);
@@ -518,79 +520,16 @@ static inline bool handle_keycode_2(keyrecord_t *record) {
         if(pressedWithShift == true) {
             unregister_code(SI_V);
 
-            // Unregister Right Alt back to default state and enable shift
+            // Unregister Right Alt back to default state and register shift
             // (if it was not released before the key (2) was released)
             unregister_code(KC_RALT);
-            if(fs_shiftPress == true) {
-                // Shift key still pressed -> register it back
-                register_code(KC_LSFT);
-            }
+            reg_shift_if_pressed();
         } else {
             unregister_code(SI_2);
         }
     }
 
     return false; // Skip all further processing of this key
-
-    /* // Problem with this option: when holding '@' it doesn't repeat */
-    /* // and on one Ubuntu laptop in terminal '@' was rarely registered (mostly 'v' or 'V') */
-    /* static bool pressedWithShift = false; */
-
-    /* if(record->event.pressed) { */
-    /*     // Key pressed */
-    /*     if(get_mods() & MODS_SHIFT_MASK) { */
-    /*         // Pressed with shift: '@' */
-    /*         // Register Right Alt and unregister Shift */
-    /*         // ('@' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift) */
-    /*         pressedWithShift = true; */
-    /*         reg_alt_unreg_shift(); */
-    /*         register_code(SI_V); */
-    /*         unregister_code(SI_V); */
-    /*         unreg_alt_reg_shift(); */
-    /*     } else { */
-    /*         // Pressed without shift: '2' */
-    /*         pressedWithShift = false; */
-    /*         register_code(SI_2); */
-    /*     } */
-    /* } else { */
-    /*     // Key released */
-    /*     if(pressedWithShift == false) { */
-    /*         unregister_code(SI_2); */
-    /*     } */
-    /* } */
-
-    /* return false; // Skip all further processing of this key */
-
-    /* // Problem with this option: when shift is released before the key (2), shift is stuck until pressed again */
-    /* static bool pressedWithShift = false; */
-
-    /* if(record->event.pressed) { */
-    /*     // Key pressed */
-    /*     if(get_mods() & MODS_SHIFT_MASK) { */
-    /*         // Pressed with shift: '@' */
-    /*         // Register Right Alt and unregister Shift */
-    /*         // ('@' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift) */
-    /*         reg_alt_unreg_shift(); */
-    /*         pressedWithShift = true; */
-    /*         register_code(SI_V); */
-    /*     } else { */
-    /*         // Pressed without shift: '2' */
-    /*         pressedWithShift = false; */
-    /*         register_code(SI_2); */
-    /*     } */
-    /* } else { */
-    /*     // Key released */
-    /*     if(pressedWithShift == true) { */
-    /*         unregister_code(SI_V); */
-
-    /*         // Unregister Right Alt back to default state and register pressed Shift */
-    /*         unreg_alt_reg_shift(); */
-    /*     } else { */
-    /*         unregister_code(SI_2); */
-    /*     } */
-    /* } */
-
-    /* return false; // Skip all further processing of this key */
 }
 
 // '6'  '^'
@@ -599,7 +538,7 @@ static inline bool handle_keycode_6(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '^'
 
             // Host dependent
@@ -628,8 +567,11 @@ static inline bool handle_keycode_6(keyrecord_t *record) {
 
             // Host dependent
             if(fs_hostOs == KEYMAP_hostOs_WIN) {
-                // Unregister Right Alt back to default state and register pressed Shift
-                unreg_alt_reg_shift();
+                // Unregister Right Alt back to default state
+                unregister_code(KC_RALT);
+
+                // Register shift (if it was not released before the key (6) was released)
+                reg_shift_if_pressed();
             } else {
                 // Unregister Right Alt back to default state
                 unregister_code(KC_RALT);
@@ -648,7 +590,7 @@ static inline bool handle_keycode_7(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '&'
             pressedWithShift = true;
             register_code(SI_6);
@@ -675,7 +617,7 @@ static inline bool handle_keycode_8(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '*'
             pressedWithShift = true;
             register_code(SI_PLUS);
@@ -702,7 +644,7 @@ static inline bool handle_keycode_9(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '('
             pressedWithShift = true;
             register_code(SI_8);
@@ -729,7 +671,7 @@ static inline bool handle_keycode_0(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: ')'
             pressedWithShift = true;
             register_code(SI_9);
@@ -756,7 +698,7 @@ static inline bool handle_keycode_euro(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '°'
             pressedWithShift = true;
             // Register Right Alt ('°' on slovenian keyboard is with Right Alt (Alt Gr) and Shift)
@@ -789,7 +731,7 @@ static inline bool handle_keycode_lbrc(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '{'
             // Register Right Alt and unregister Shift
             // ('{' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift)
@@ -808,8 +750,11 @@ static inline bool handle_keycode_lbrc(keyrecord_t *record) {
         if(pressedWithShift == true) {
             unregister_code(SI_B);
 
-            // Unregister Right Alt back to default state and register pressed Shift
-            unreg_alt_reg_shift();
+            // Unregister Right Alt back to default state
+            unregister_code(KC_RALT);
+
+            // Register shift (if it was not released before the key ([) was released)
+            reg_shift_if_pressed();
         } else {
             unregister_code(SI_F);
             // Unregister Right Alt back to default state
@@ -827,7 +772,7 @@ static inline bool handle_keycode_rbrc(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '}'
             // Register Right Alt and unregister Shift
             // ('}' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift)
@@ -846,8 +791,11 @@ static inline bool handle_keycode_rbrc(keyrecord_t *record) {
         if(pressedWithShift == true) {
             unregister_code(SI_N);
 
-            // Unregister Right Alt back to default state and register pressed Shift
-            unreg_alt_reg_shift();
+            // Unregister Right Alt back to default state
+            unregister_code(KC_RALT);
+
+            // Register shift (if it was not released before the key (]) was released)
+            reg_shift_if_pressed();
         } else {
             unregister_code(SI_G);
             // Unregister Right Alt back to default state
@@ -865,7 +813,7 @@ static inline bool handle_keycode_grv(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '~'
 
             // Host dependent
@@ -903,8 +851,11 @@ static inline bool handle_keycode_grv(keyrecord_t *record) {
 
             // Host dependent
             if(fs_hostOs == KEYMAP_hostOs_WIN) {
-                // Unregister Right Alt back to default state and register pressed Shift
-                unreg_alt_reg_shift();
+                // Unregister Right Alt back to default state
+                unregister_code(KC_RALT);
+
+                // Register shift (if it was not released before the key (~) was released)
+                reg_shift_if_pressed();
             } else {
                 // Unregister Right Alt back to default state
                 unregister_code(KC_RALT);
@@ -932,7 +883,7 @@ static inline bool handle_keycode_bsls(keyrecord_t *record) {
 
     if(record->event.pressed) {
         // Key pressed
-        if(get_mods() & MODS_SHIFT_MASK) {
+        if(fs_shiftPress == true) {
             // Pressed with shift: '|'
             // Register Right Alt and unregister Shift
             // ('|' on slovenian keyboard is with Right Alt (Alt Gr) and without Shift)
@@ -951,8 +902,11 @@ static inline bool handle_keycode_bsls(keyrecord_t *record) {
         if(pressedWithShift == true) {
             unregister_code(SI_W);
 
-            // Unregister Right Alt back to default state and register pressed Shift
-            unreg_alt_reg_shift();
+            // Unregister Right Alt back to default state
+            unregister_code(KC_RALT);
+
+            // Register shift (if it was not released before the key (\) was released)
+            reg_shift_if_pressed();
         } else {
             unregister_code(SI_Q);
             // Unregister Right Alt back to default state
@@ -1059,10 +1013,11 @@ static void reg_alt_unreg_shift(void) {
     unregister_code(KC_LSFT);
 }
 
-static void unreg_alt_reg_shift(void) {
-    // Unregister Right Alt back to default state
-    unregister_code(KC_RALT);
-
-    // Register Left Shift back
-    register_code(KC_LSFT);
+static void reg_shift_if_pressed(void) {
+    // Register Shift (if it is still physically pressed)
+    // This function is used when Shift is manually unregistered to send custom key
+    if(fs_shiftPress == true) {
+        // Shift key still pressed -> register it back
+        register_code(KC_LSFT);
+    }
 }
