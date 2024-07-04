@@ -185,8 +185,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [EXT2] = LAYOUT_split_3x6_3(
         _______,  KC_F1,   KC_F2,    KC_F3,    KC_F4,    KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   xxxxxxx,
-        xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_F11,   KC_F12,   xxxxxxx,
-        _______,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       _MICMUTE, KC_BRID,  KC_BRIU,  xxxxxxx,  xxxxxxx,  _______,
+        xxxxxxx,  DM_PLY1, DM_PLY2,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_F11,   KC_F12,   xxxxxxx,
+        _______,  DM_REC1, DM_REC2,  DM_RSTP,  xxxxxxx,  xxxxxxx,       _MICMUTE, KC_BRID,  KC_BRIU,  xxxxxxx,  xxxxxxx,  _______,
                                      _______,  _______,  _______,       _______,  xxxxxxx,  _______
     ),
     [L_QMK] = LAYOUT_split_3x6_3(
