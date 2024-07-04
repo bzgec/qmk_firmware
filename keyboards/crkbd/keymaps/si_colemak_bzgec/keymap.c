@@ -32,11 +32,11 @@
  * Extend layer 1:
  ***************************************************************************************************
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  | TAB    | ESC    | WhUp   | GoBack | GoFwd  |        |             | Home   | PgDn   | PgUp   | End    | Del    | Print  |
+ *  | TAB    | ESC    | WhUp   | GoBack | GoFwd  |        |             | Home   | PgDn   | PgUp   | End    |        | Print  |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
  *  | XXX    | Back   | WhDown | L desk | R desk |        |             | Left   | Down   | Up     | Right  | Back   | ESC    |
  *  +--------+--------+--------+--------+--------+--------+             +--------+--------+--------+--------+--------+--------+
- *  | Shift  |        |        |        |        |        |             | Undo   | Redo   |        |        | Del    | Shift  |
+ *  | Shift  | Del    |        |        |        |        |             | Undo   | Redo   |        |        | Del    | Shift  |
  *  +--------+--------+--------+----+---+----+---+----+---+----+   +----+---+----+---+----+---+----+--------+--------+--------+
  *                                  | Win    | Ctrl   | Enter  |   | Enter  | EXT2   | L Alt  |
  *                                  +--------+--------+--------+   +--------+--------+--------+
@@ -178,9 +178,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       _______,  _______,  _______,       _______,  xxxxxxx,  _______
     ),
     [EXT1] = LAYOUT_split_3x6_3(
-        _______,  KC_ESC,   KC_WH_U,  KC_WBAK,  KC_WFWD,  xxxxxxx,       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   KC_DEL,   KC_PSCR,
+        _______,  KC_ESC,   KC_WH_U,  KC_WBAK,  KC_WFWD,  xxxxxxx,       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   xxxxxxx,  KC_PSCR,
         xxxxxxx,  KC_BSPC,  KC_WH_D,  _TOLDSK,  _TORDSK,  xxxxxxx,       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_BSPC,  KC_ESC,
-        _______,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_UNDO,  KC_AGIN,  xxxxxxx,  xxxxxxx,  KC_DEL,   _______,
+        _______,  KC_DEL,   xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_UNDO,  KC_AGIN,  xxxxxxx,  xxxxxxx,  KC_DEL,   _______,
                                       _______,  _______,  KC_ENT,        _______,  MO(EXT2), _______
     ),
     [EXT2] = LAYOUT_split_3x6_3(
