@@ -11,6 +11,10 @@
 #define SPLIT_USB_DETECT
 #define SPLIT_WATCHDOG_ENABLE
 
+#define DYNAMIC_MACRO_SIZE 128
+#define DYNAMIC_MACRO_NO_NESTING 1  // Disable the ability to call a macro from another macro (nested macros)
+#define DYNAMIC_MACRO_DELAY 2       // Sets the waiting time (ms unit) when sending each key
+
 /***************************************************************************************************
  * Unknown
  **************************************************************************************************/
