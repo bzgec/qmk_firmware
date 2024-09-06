@@ -128,7 +128,7 @@
 #define L_QMK  4u  // QMK layer
 
 // Go to QMK layer when holding TAB key
-// On tab: TAB
+// On tap: TAB
 // On hold: L_QMK (QMK layer)
 #define TAB_L_QMK  LT(L_QMK, KC_TAB)
 
@@ -173,27 +173,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [SYM] = LAYOUT_split_3x6_3(
         _______,  SI_1,     _2,       SI_3,     SI_4,     SI_5,          _6,       _7,       _8,       _9,       _0,       SI_MINS,
-        MO(EXT2), xxxxxxx,  xxxxxxx,  SI_SCAR,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  _EURO,    _LBRC,    _RBRC,    _GRV,
+        MO(EXT2), xxxxxxx,  xxxxxxx,  SI_SCAR,  xxxxxxx,  xxxxxxx,       xxxxxxx,  MS_BTN1,  _EURO,    _LBRC,    _RBRC,    _GRV,
         _______,  SI_ZCAR,  xxxxxxx,  SI_CCAR,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  _BSLS,    _______,
                                       _______,  _______,  _______,       _______,  xxxxxxx,  _______
     ),
     [EXT1] = LAYOUT_split_3x6_3(
-        _______,  KC_ESC,   KC_WH_U,  KC_WBAK,  KC_WFWD,  xxxxxxx,       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   xxxxxxx,  KC_PSCR,
-        xxxxxxx,  KC_BSPC,  KC_WH_D,  _TOLDSK,  _TORDSK,  xxxxxxx,       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_BSPC,  KC_ESC,
-        _______,  KC_DEL,   xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_UNDO,  KC_AGIN,  xxxxxxx,  xxxxxxx,  KC_DEL,   _______,
+        _______,  KC_ESC,   MS_BTN4,  MS_WHLU,  MS_BTN5,  xxxxxxx,       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   xxxxxxx,  KC_PSCR,
+        xxxxxxx,  KC_BSPC,  MS_WHLL,  MS_WHLD,  MS_WHLR,  xxxxxxx,       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_BSPC,  KC_ESC,
+        _______,  KC_DEL,   xxxxxxx,  _TOLDSK,  _TORDSK,  xxxxxxx,       KC_UNDO,  KC_AGIN,  xxxxxxx,  xxxxxxx,  KC_DEL,   _______,
                                       _______,  _______,  KC_ENT,        _______,  MO(EXT2), _______
     ),
     [EXT2] = LAYOUT_split_3x6_3(
         _______,  KC_F1,   KC_F2,    KC_F3,    KC_F4,    KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   xxxxxxx,
         xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_F11,   KC_F12,   xxxxxxx,
         _______,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       _MICMUTE, KC_BRID,  KC_BRIU,  xxxxxxx,  xxxxxxx,  _______,
-                                     _______,  _______,  _______,       _______,  xxxxxxx,  _______
-    ),
+                                     _______,  _______,  xxxxxxx,       _______,  xxxxxxx,  _______
+    ),//KC_CAPS
     [L_QMK] = LAYOUT_split_3x6_3(
         xxxxxxx,  xxxxxxx, xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,
-        xxxxxxx,  xxxxxxx, DM_RSTP,  DM_PLY1,  DM_PLY2,  xxxxxxx,       xxxxxxx,  _TO_LIN,  _TO_WIN,  xxxxxxx,  xxxxxxx,  xxxxxxx,
-        xxxxxxx,  xxxxxxx, xxxxxxx,  DM_REC1,  DM_REC2,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,
-                                     xxxxxxx,  xxxxxxx,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx
+        QK_RBT,   xxxxxxx, DM_RSTP,  DM_PLY1,  DM_PLY2,  xxxxxxx,       MS_LEFT,  MS_DOWN,  MS_UP,    MS_RGHT,  xxxxxxx,  xxxxxxx,
+        QK_BOOT,  xxxxxxx, xxxxxxx,  DM_REC1,  DM_REC2,  xxxxxxx,       xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,  xxxxxxx,
+                                     _TO_LIN,  _TO_WIN,  KC_ENT,        MS_BTN3,  MS_BTN1,  MS_BTN2
     ),
     // clang-format on
 };
